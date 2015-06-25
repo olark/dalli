@@ -33,7 +33,7 @@ module ActionDispatch
       private
       
         def get_session(env, sid)
-          sid ||= generate_sid
+          sid = generate_sid unless sid and !sid.empty?
           begin
             session = @pool.get(sid) || {}
           rescue Dalli::DalliError
